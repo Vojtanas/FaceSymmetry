@@ -1,0 +1,219 @@
+<!-- 
+Application for evaluation of facial symmetry using Microsoft Kinect v2.
+Copyright(C) 2017  Sedlák Vojtěch (Vojta.sedlak@gmail.com)
+
+This file is part of FaceSymmetry. 
+
+FaceSymmetry is free software: you can redistribute it and/or modify 
+it under the terms of the GNU General Public License as published by 
+the Free Software Foundation, either version 3 of the License, or 
+(at your option) any later version. 
+
+FaceSymmetry is distributed in the hope that it will be useful, 
+but WITHOUT ANY WARRANTY; without even the implied warranty of 
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+GNU General Public License for more details. 
+
+You should have received a copy of the GNU General Public License 
+along with Application for evaluation of facial symmetry using Microsoft Kinect v2.. If not, see <http://www.gnu.org/licenses/>.
+ --> 
+
+<Window x:Class="FaceSymmetry.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"       
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FaceSymmetry"
+        mc:Ignorable="d"
+        Title="Face Symmetry"
+        WindowStartupLocation="CenterScreen"  WindowState="Maximized"     
+        d:DesignHeight="800" d:DesignWidth="1400" 
+        Icon="/FaceSymmetry;component/Resources/mainIco.ico" 
+        FontSize="16" 
+        ContentRendered="Window_ContentRendered" KeyDown="Window_KeyDown"  >
+
+    <Window.Resources>
+        <Image x:Key="reload" Source="../../Resources/reload.ico" />
+    </Window.Resources>
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Menu x:Name="menu" Style="{StaticResource MenuStyle}" 
+                 FontSize="16" 
+                 FontWeight="Bold" 
+                 Grid.Row="0"                  
+                 HorizontalAlignment="Left" 
+                 IsMainMenu="True" 
+                 UsesItemContainerTemplate="True">
+
+            <MenuItem x:Name="File_Settings" Header="_FILE"   >
+                <MenuItem x:Name="about" Header="About" Click="about_Click"  />
+                <MenuItem x:Name="exit" Header="Exit" Click="exit_Click" />
+            </MenuItem>
+
+            <MenuItem x:Name="Menu_Settings" Header="_SETTINGS"  >
+                <MenuItem x:Name="GeneralSettings" Margin="0,0,0,0" Header="General"  Command="{Binding GeneralSettingsCommand}" />
+                <MenuItem x:Name="DatabaseSettings" Margin="0,0,0,0" Header="Database" Command="{Binding DatabaseSettingsCommand}"/>
+                <MenuItem x:Name="ExerciseSettings" Margin="0,0,0,0"  Header="Exercises" Command="{Binding ExerciseSettingsCommand}" />
+                <MenuItem x:Name="EmulatorSettings" Margin="0,0,0,0"  Header="Emulator" InputGestureText="OFF" Command="{Binding EmulatorCommand}" />
+
+            </MenuItem>
+
+            <MenuItem x:Name="Menu_Patient"  Header="_PATIENT"  >
+                <MenuItem x:Name="NewPatient"   Header="New Patient" InputGestureText="F1"  Command="{Binding NewPatientCommand}"/>
+                <MenuItem x:Name="DeletePatient"  Header="Delete Patient" Command="{Binding DeletePatientCommand}" />
+            </MenuItem>
+
+            <MenuItem x:Name="Menu_Examination"  Header="_EXAMINATION"  >
+                <MenuItem x:Name="OpenExamination"   Header="Open" Command="{Binding OpenExaminationCommand}" />
+                <MenuItem x:Name="DeleteExamination"  Header="Delete" Command="{Binding DeleteExaminationCommand}" />
+                <MenuItem x:Name="OpenFolder" Header="Open Folder" Command="{Binding OpenExaminationFolderCommand}" />
+                <MenuItem x:Name="ImportExamination" Header="Import" Command="{Binding ImportExaminationCommand}" />
+            </MenuItem>
+
+            <MenuItem x:Name="Menu_NewRecord" Header = "_NEW RECORD" Command="{Binding NewRecordCommand}" />
+            <Rectangle Margin="0,0,100,0"/>
+
+        </Menu>
+
+        <Grid  Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="1*" MinWidth="350"/>
+            </Grid.ColumnDefinitions>
+
+            <DockPanel Grid.Column="0">
+                <Grid Margin="20,20,20,50">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45"/>
+                        <RowDefinition Height="11*"/>
+                        <RowDefinition Height="7*" />
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Margin="0,0,0,5" VerticalAlignment="Center" Height="40">
+                        <Button  Command="{Binding ReloadPatientsGridCommand}"
+                                 Width="40" 
+                                 Style="{StaticResource RefreshButtonStyle}"
+                                 HorizontalAlignment="Left" 
+                                 Content="{StaticResource reload}"
+                                 Margin="5,0,0,0"
+                                 ToolTip="Refresh"/>
+                    </StackPanel>
+
+                    <Border x:Name="searchBorder"
+                            Grid.Row="1"
+                            Height="25" 
+                            VerticalAlignment="Top" 
+                            CornerRadius="5,5,0,0"  
+                            BorderBrush="{StaticResource MenuColor}"
+                            BorderThickness="2" 
+                            GotFocus="searchBorder_GotFocus"
+                            LostFocus="searchBorder_LostFocus">
+
+                        <TextBox x:Name="searchBox"
+                                 Grid.Row="1"
+                                 Height="20" VerticalAlignment="Center"
+                                 BorderThickness="0"
+                                 Margin="3,3,3,0"
+                                 Text="Search..."
+                                 Foreground="LightGray"
+                                 KeyDown="searchBox_KeyDown"/>
+                    </Border>
+
+                    <Border x:Name="patientBorder"
+                            Margin="0,5,0,0" 
+                            Grid.Row="1"
+                            BorderBrush="{StaticResource MenuColor}"
+                            BorderThickness="2,0,2,0">
+
+                        <DataGrid x:Name="patientGrid"
+                              Grid.Row="1"
+                              BorderBrush="{StaticResource MenuColor}"                                 
+                              BorderThickness="0" 
+                              FontSize="16"
+                              Margin="0,20,0,0"                               
+                              ItemsSource="{Binding Path=Patients}" 
+                              SelectedValue="{Binding Path=SelectedPatient}"
+                              VerticalAlignment="Stretch" 
+                              VerticalContentAlignment="Stretch"
+                              HorizontalAlignment="Stretch" 
+                              HorizontalContentAlignment="Stretch" 
+                              Background="{x:Null}"                              
+                              SelectionMode="Single" 
+                              Foreground="Black"                                  
+                              GridLinesVisibility="Horizontal"                                     
+                              IsReadOnly="True" 
+                              AutoGenerateColumns="False">
+
+                            <DataGrid.Resources>
+                                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="#FF86BCFF"/>
+                            </DataGrid.Resources>
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding ID}" IsReadOnly="True" Header="Patient ID" Width="1*" />
+                                <DataGridTextColumn Binding="{Binding Surname}" IsReadOnly="True" Header="Surname" Width="3*"/>
+                                <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name" Width="3*"/>
+                                <DataGridTextColumn Binding="{Binding PID}" Header="Personal Identification number" Width="4*" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+
+                    <Border x:Name="examinationBorder"
+                            Grid.Row="2"
+                            BorderBrush="{StaticResource MenuColor}"
+                            BorderThickness="2,1,2,2">
+
+                        <DataGrid x:Name="examinationGrid" 
+                              Grid.Row="1"
+                              BorderBrush="{StaticResource MenuColor}"
+                              BorderThickness="0" 
+                              FontSize="16"
+                              Margin="0"                               
+                              VerticalAlignment="Stretch" 
+                              VerticalContentAlignment="Stretch"
+                              HorizontalAlignment="Stretch" 
+                              HorizontalContentAlignment="Stretch" 
+                              ColumnWidth="*"                             
+                              Background="{x:Null}" 
+                              IsReadOnly="True" 
+                              AutoGenerateColumns="False" 
+                              SelectionMode="Single" 
+                              GridLinesVisibility="Horizontal"
+                              ItemsSource="{Binding Path=Examinations}" 
+                              SelectedValue="{Binding Path=SelectedExamination}" >
+
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding ID}" IsReadOnly="True" Header="Examination ID" Width="1*" />
+                                <DataGridTextColumn Binding="{Binding Date, StringFormat={}{0:dd.MM.yyyy HH:mm:ss}}" IsReadOnly="True" Header="Date" Width="2*"  />
+
+                                <DataGridTextColumn Binding="{Binding Guid}" Header="Guid" Width="3*" />
+                                <DataGridTextColumn Binding="{Binding RecordLocation}" Header="Record" Width="1*" />
+                            </DataGrid.Columns>
+                            <DataGrid.Resources>
+                                <Style TargetType="DataGridRow">
+                                    <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                                </Style>
+                            </DataGrid.Resources>
+                        </DataGrid>
+                    </Border>
+                </Grid>
+            </DockPanel>
+
+
+            <Border CornerRadius="30,0,0,0" Grid.Column="1"   DockPanel.Dock="Left" Background="{StaticResource MenuColor}" >
+                <local:RightPanel x:Name="rightPanel"
+                                      DataContext="{Binding}"
+                                      VerticalContentAlignment="Stretch"
+                                      HorizontalAlignment="Stretch" 
+                                      HorizontalContentAlignment="Stretch" 
+                                      VerticalAlignment="Stretch"
+                                      Margin="0,10,10,10" 
+                                      Width="auto" Height="auto"/>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

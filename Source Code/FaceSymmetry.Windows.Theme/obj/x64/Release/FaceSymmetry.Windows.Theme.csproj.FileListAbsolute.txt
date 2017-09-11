@@ -1,0 +1,12 @@
+F:\Development\FaceSymmetry\FaceSymmetry.Windows.Theme\bin\x64\Release\FaceSymmetry.Windows.Theme.dll
+F:\Development\FaceSymmetry\FaceSymmetry.Windows.Theme\obj\x64\Release\FaceSymmetry.Windows.Theme_MarkupCompile.cache
+F:\Development\FaceSymmetry\FaceSymmetry.Windows.Theme\obj\x64\Release\FaceSymmetry.Windows.Theme_MarkupCompile.lref
+F:\Development\FaceSymmetry\FaceSymmetry.Windows.Theme\obj\x64\Release\Template.baml
+F:\Development\FaceSymmetry\FaceSymmetry.Windows.Theme\obj\x64\Release\Button.baml
+F:\Development\FaceSymmetry\FaceSymmetry.Windows.Theme\obj\x64\Release\Menu.baml
+F:\Development\FaceSymmetry\FaceSymmetry.Windows.Theme\obj\x64\Release\Theme.baml
+F:\Development\FaceSymmetry\FaceSymmetry.Windows.Theme\obj\x64\Release\FaceSymmetry.Windows.Theme.g.resources
+F:\Development\FaceSymmetry\FaceSymmetry.Windows.Theme\obj\x64\Release\FaceSymmetry.Windows.Theme.Properties.Resources.resources
+F:\Development\FaceSymmetry\FaceSymmetry.Windows.Theme\obj\x64\Release\FaceSymmetry.Windows.Theme.csproj.GenerateResource.Cache
+F:\Development\FaceSymmetry\FaceSymmetry.Windows.Theme\obj\x64\Release\FaceSymmetry.Windows.Theme.dll
+F:\Development\FaceSymmetry\FaceSymmetry.Windows.Theme\obj\x64\Release\FaceSymmetry.Windows.Theme.csprojResolveAssemblyReference.cache

@@ -1,0 +1,120 @@
+<!-- 
+Application for evaluation of facial symmetry using Microsoft Kinect v2.
+Copyright(C) 2017  Sedlák Vojtěch (Vojta.sedlak@gmail.com)
+
+This file is part of FaceSymmetry. 
+
+FaceSymmetry is free software: you can redistribute it and/or modify 
+it under the terms of the GNU General Public License as published by 
+the Free Software Foundation, either version 3 of the License, or 
+(at your option) any later version. 
+
+FaceSymmetry is distributed in the hope that it will be useful, 
+but WITHOUT ANY WARRANTY; without even the implied warranty of 
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+GNU General Public License for more details. 
+
+You should have received a copy of the GNU General Public License 
+along with Application for evaluation of facial symmetry using Microsoft Kinect v2.. If not, see <http://www.gnu.org/licenses/>.
+ --> 
+
+<UserControl x:Class="Evaluator.StatisticsView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Evaluator"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="1000"
+      Width="auto" Height="auto" 
+      VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+      >
+    <UserControl.Resources>
+        <Style x:Key="GroupHeaderStyle" TargetType="{x:Type GroupItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GroupItem}">
+                        <Expander x:Name="exp" IsExpanded="True"
+                              Background="White"
+                              Foreground="Black">
+                            <Expander.Header>
+                                <TextBlock Text="{Binding Name}"/>
+                            </Expander.Header>
+                            <ItemsPresenter />
+                        </Expander>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+
+    <Grid  Margin="0,10,0,0" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90" />
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <DockPanel x:Name="patientDock" Grid.Row="0" Background="{StaticResource MenuColor}"   >
+            <StackPanel Width="auto" Orientation="Horizontal" Height="50" DockPanel.Dock="Top" VerticalAlignment="Stretch" HorizontalAlignment="Left" >
+                <Label x:Name="surnameLbl" Content="Surname" Height="auto" Width="auto" Margin="10,8,0,0" VerticalAlignment="Top" />
+                <TextBox x:Name="surnameTxtBox" Height="25"  Text="{Binding SelectedPatient.Surname}"  Width="100" Margin="10,10,10,0" VerticalAlignment="Top" IsReadOnly="True"  />
+                <Label x:Name="firstNameLbl" Content="First Name" Height="auto" Width="auto" Margin="10,8,0,0" VerticalAlignment="Top" />
+                <TextBox x:Name="firstNameTxtBox" Height="25"  Text="{Binding SelectedPatient.FirstName}"  Width="100" Margin="10,10,10,0" VerticalAlignment="Top" IsReadOnly="True"  />
+                <Label x:Name="secondnameLbl" Content="Second Name" Height="auto" Width="auto" Margin="10,8,0,0" VerticalAlignment="Top" />
+                <TextBox x:Name="secondnameTxtBox" Height="25"  Text="{Binding SelectedPatient.SecondName}"  Width="100" Margin="10,10,10,0" VerticalAlignment="Top" IsReadOnly="True"  />
+
+                <Label x:Name="genderLbl" Content="Gender" Height="auto" Width="auto" Margin="10,8,0,0" VerticalAlignment="Top" />
+                <TextBox x:Name="genderTxtBox" Height="25"  Text="{Binding SelectedPatient.Gender}"  Width="60" Margin="10,10,10,0" VerticalAlignment="Top" IsReadOnly="True"  />
+
+                <Label x:Name="birthLbl" Content="Date of birth" Height="auto" Width="auto" Margin="10,8,0,0" VerticalAlignment="Top" />
+                <TextBox x:Name="birthTxtBox" Height="25"  Text="{Binding SelectedPatient.Birthday}"  Width="100" Margin="10,10,10,0" VerticalAlignment="Top" IsReadOnly="True"  />
+
+            </StackPanel>
+            <StackPanel Width="auto" Orientation="Horizontal" Height="30" DockPanel.Dock="Bottom" VerticalAlignment="Stretch" HorizontalAlignment="Left" >
+                <Label Content="Date" Margin="10,0,0,0"/>
+                <TextBox Text="{Binding SelectedExamination.Date, StringFormat={}{0:dd.MM.yyyy HH:mm:ss}}" Width="auto" Height="25" Margin="10,2,0,0" VerticalAlignment="Top" IsReadOnly="True" />
+                <Label x:Name="analysisLbl" Content="Analysis" Height="auto" Width="auto" Margin="10,0,0,0" VerticalAlignment="Top" />
+                <ComboBox x:Name="analysisCmbBx" Height="25" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,2,10,0" 
+                           SelectedItem="{Binding SelectedInterpolation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <Label x:Name="graphLbl" Content="Graph values" Height="auto" Width="auto" Margin="10,0,0,0" VerticalAlignment="Top" />
+                <ComboBox x:Name="graphCmbBx" Height="25" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,2,10,0"
+                           SelectedItem="{Binding SelectedGraph, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+        </DockPanel>
+
+        <Grid Grid.Row="1">
+            <StackPanel x:Name="tableStackPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="auto" Orientation="Horizontal">
+                <DataGrid x:Name="gridDescription" Margin="10" Width="auto" Height="auto" HorizontalAlignment="Center" VerticalAlignment="Top" BorderThickness="0"
+                          IsReadOnly="True" AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="FullRow" Visibility="Hidden" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Exercise}" IsReadOnly="True" Header="Exercise" />
+                        <DataGridTextColumn Binding="{Binding Description}" IsReadOnly="True" Header="Description" />
+                    </DataGrid.Columns>
+
+                </DataGrid>
+                <DataGrid x:Name="gridExercise" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Top" BorderThickness="0"
+                          IsReadOnly="True" AutoGenerateColumns="False" SelectionMode="Extended" SelectionUnit="FullRow" Visibility="Hidden" >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Area}" IsReadOnly="True" Header="Area" />
+                        <DataGridTextColumn Binding="{Binding Min}" IsReadOnly="True" Header="Min" />
+                        <DataGridTextColumn Binding="{Binding Max}" IsReadOnly="True" Header="Max" />
+                        <DataGridTextColumn Binding="{Binding Mean}" IsReadOnly="True" Header="Mean" />
+                        <DataGridTextColumn Binding="{Binding Median}" IsReadOnly="True" Header="Median" />
+                        <DataGridTextColumn Binding="{Binding Variance}" IsReadOnly="True" Header="Variance" />
+                        <DataGridTextColumn Binding="{Binding StdDev}" IsReadOnly="True" Header="Standard Deviation" />
+                    </DataGrid.Columns>
+
+                </DataGrid>
+            </StackPanel>
+        </Grid>
+
+
+
+
+
+    </Grid>
+
+
+
+</UserControl>

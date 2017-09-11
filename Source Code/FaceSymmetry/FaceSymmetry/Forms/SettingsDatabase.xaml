@@ -1,0 +1,52 @@
+<!-- 
+Application for evaluation of facial symmetry using Microsoft Kinect v2.
+Copyright(C) 2017  Sedlák Vojtěch (Vojta.sedlak@gmail.com)
+
+This file is part of FaceSymmetry. 
+
+FaceSymmetry is free software: you can redistribute it and/or modify 
+it under the terms of the GNU General Public License as published by 
+the Free Software Foundation, either version 3 of the License, or 
+(at your option) any later version. 
+
+FaceSymmetry is distributed in the hope that it will be useful, 
+but WITHOUT ANY WARRANTY; without even the implied warranty of 
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+GNU General Public License for more details. 
+
+You should have received a copy of the GNU General Public License 
+along with Application for evaluation of facial symmetry using Microsoft Kinect v2.. If not, see <http://www.gnu.org/licenses/>.
+ --> 
+
+<Window x:Class="FaceSymmetry.SettingsDatabase"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FaceSymmetry"
+        mc:Ignorable="d"
+        Title="DatabaseSettings" Height="231.683" Width="442.849" FontSize="16" WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="18*"/>
+            <RowDefinition Height="5*"/>
+        </Grid.RowDefinitions>
+
+        <Label x:Name="serverAddressLbl" Content="Server" Grid.Row="0" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top" Height="28" Width="59" />
+        <TextBox x:Name="serverAddressTxtBx" Grid.Row="0"  Height="28" Margin="74,33,0,0"  
+                 Text="server"  Width="170" FontSize="16"
+                 VerticalAlignment="Top" HorizontalAlignment="Left"
+                 VerticalContentAlignment="Center" HorizontalContentAlignment="Left" />
+
+        <Button x:Name="TestBtn" Grid.Row="0" Content="Test Connection" Style="{StaticResource FSButtonStyle}" Margin="275,29,0,0" 
+                Click="TestBtn_Click" Height="32" VerticalAlignment="Top" HorizontalAlignment="Left" Width="132"/>
+
+        <TextBox x:Name="exceptionTxtBx" Margin="10,75,10,10" BorderThickness="0" IsReadOnly="True" VerticalScrollBarVisibility="Auto" Width="auto" Height="auto"/>
+
+
+        <DockPanel x:Name="bottomDock"  Background="#FF316CB4"  Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+            <Button Name="buttonSave" Style="{StaticResource ButtonStyleGreen}" Width="100" Height="25" Content="Save" Click="buttonSave_Click" />
+        </DockPanel>
+
+    </Grid>
+</Window>

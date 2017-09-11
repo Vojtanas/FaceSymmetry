@@ -1,0 +1,14 @@
+C:\Users\Vojta\Google Drive\VSCHT\#Diplomova prace\Development\FaceSymmetry\FaceSymmetry.Windows.Theme\bin\x64\Debug\FaceSymmetry.Windows.Theme.dll
+C:\Users\Vojta\Google Drive\VSCHT\#Diplomova prace\Development\FaceSymmetry\FaceSymmetry.Windows.Theme\bin\x64\Debug\FaceSymmetry.Windows.Theme.pdb
+C:\Users\Vojta\Google Drive\VSCHT\#Diplomova prace\Development\FaceSymmetry\FaceSymmetry.Windows.Theme\obj\x64\Debug\FaceSymmetry.Windows.Theme.csprojResolveAssemblyReference.cache
+C:\Users\Vojta\Google Drive\VSCHT\#Diplomova prace\Development\FaceSymmetry\FaceSymmetry.Windows.Theme\obj\x64\Debug\FaceSymmetry.Windows.Theme_MarkupCompile.cache
+C:\Users\Vojta\Google Drive\VSCHT\#Diplomova prace\Development\FaceSymmetry\FaceSymmetry.Windows.Theme\obj\x64\Debug\FaceSymmetry.Windows.Theme_MarkupCompile.lref
+C:\Users\Vojta\Google Drive\VSCHT\#Diplomova prace\Development\FaceSymmetry\FaceSymmetry.Windows.Theme\obj\x64\Debug\Template.baml
+C:\Users\Vojta\Google Drive\VSCHT\#Diplomova prace\Development\FaceSymmetry\FaceSymmetry.Windows.Theme\obj\x64\Debug\Button.baml
+C:\Users\Vojta\Google Drive\VSCHT\#Diplomova prace\Development\FaceSymmetry\FaceSymmetry.Windows.Theme\obj\x64\Debug\Menu.baml
+C:\Users\Vojta\Google Drive\VSCHT\#Diplomova prace\Development\FaceSymmetry\FaceSymmetry.Windows.Theme\obj\x64\Debug\Theme.baml
+C:\Users\Vojta\Google Drive\VSCHT\#Diplomova prace\Development\FaceSymmetry\FaceSymmetry.Windows.Theme\obj\x64\Debug\FaceSymmetry.Windows.Theme.g.resources
+C:\Users\Vojta\Google Drive\VSCHT\#Diplomova prace\Development\FaceSymmetry\FaceSymmetry.Windows.Theme\obj\x64\Debug\FaceSymmetry.Windows.Theme.Properties.Resources.resources
+C:\Users\Vojta\Google Drive\VSCHT\#Diplomova prace\Development\FaceSymmetry\FaceSymmetry.Windows.Theme\obj\x64\Debug\FaceSymmetry.Windows.Theme.csproj.GenerateResource.Cache
+C:\Users\Vojta\Google Drive\VSCHT\#Diplomova prace\Development\FaceSymmetry\FaceSymmetry.Windows.Theme\obj\x64\Debug\FaceSymmetry.Windows.Theme.dll
+C:\Users\Vojta\Google Drive\VSCHT\#Diplomova prace\Development\FaceSymmetry\FaceSymmetry.Windows.Theme\obj\x64\Debug\FaceSymmetry.Windows.Theme.pdb

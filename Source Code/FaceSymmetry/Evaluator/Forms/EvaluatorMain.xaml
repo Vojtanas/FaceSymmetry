@@ -1,0 +1,67 @@
+<!-- 
+Application for evaluation of facial symmetry using Microsoft Kinect v2.
+Copyright(C) 2017  Sedlák Vojtěch (Vojta.sedlak@gmail.com)
+
+This file is part of FaceSymmetry. 
+
+FaceSymmetry is free software: you can redistribute it and/or modify 
+it under the terms of the GNU General Public License as published by 
+the Free Software Foundation, either version 3 of the License, or 
+(at your option) any later version. 
+
+FaceSymmetry is distributed in the hope that it will be useful, 
+but WITHOUT ANY WARRANTY; without even the implied warranty of 
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+GNU General Public License for more details. 
+
+You should have received a copy of the GNU General Public License 
+along with Application for evaluation of facial symmetry using Microsoft Kinect v2.. If not, see <http://www.gnu.org/licenses/>.
+ --> 
+
+<Window x:Class="Evaluator.EvaluatorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Evaluator"
+        mc:Ignorable="d"
+        Title="Evaluator"
+        FontSize="16" d:DesignHeight="700" d:DesignWidth="1000"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized"
+        Icon="/FaceSymmetry;component/Resources/mainIco.ico" 
+        DataContext="{Binding}"
+        >
+    
+    <Grid x:Name="mainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        
+        <Menu x:Name="menu" Grid.Row="0"  Style="{StaticResource MenuStyle}" 
+                 FontSize="16" 
+                 FontWeight="Bold"                             
+                 HorizontalAlignment="Left" 
+                 IsMainMenu="True" 
+                 UsesItemContainerTemplate="True"               
+                 >
+
+
+            <MenuItem x:Name="dataMenu" Header="_DATA" Command="{Binding ViewDataCommand}"   />
+            <MenuItem x:Name="statisticsMenu" Header="_STATISTICS" Command="{Binding ViewStatisticsCommand}" />
+         
+            <Rectangle Margin="0,0,100,0"/>
+
+        </Menu>
+        
+        <ContentControl Grid.Row="1" x:Name="content" 
+                        Content="{Binding CurrentViewModel.Content}"                        
+                        VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                        Width="auto" Height="auto"
+                        />
+        
+
+
+    </Grid>
+</Window>
