@@ -557,9 +557,18 @@ namespace Evaluator
                     var y = item.Y;
                     var p = item.Z;
 
-                    Point3D point = new Point3D((y * step) - corrY, (x * step) - corrX, p);
-                    positions.Add(point);
-                    textureC.Add(new Point());
+                    if (double.IsNaN(p))
+                    {
+                        Point3D point = new Point3D(0, 0, -1);
+                        positions.Add(point);
+                        textureC.Add(new Point());
+                    }
+                    else
+                    {
+                        Point3D point = new Point3D((y * step) - corrY, (x * step) - corrX, p);
+                        positions.Add(point);
+                        textureC.Add(new Point());
+                    }
                 }
 
                 normals.Freeze();

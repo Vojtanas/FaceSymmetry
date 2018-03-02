@@ -288,12 +288,7 @@ namespace Common
                 for (int y = 0; y < lengthY; y++)
                 {
 
-                    double z = (double)gridArray.GetValue(x, y);
-
-                    if (double.IsNaN(z))
-                    {
-                        z = double.MaxValue;
-                    }
+                    double z = (double)gridArray.GetValue(x, y);                  
 
                     Point3D point = new Point3D(x, y, z);
                     points.Add(point);
